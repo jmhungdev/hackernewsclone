@@ -1,8 +1,6 @@
 {
   "presets": [
-    [
-      "@babel/preset-env",
-      {
+    ["@babel/preset-env", {
         "debug": false,
         "loose": false,
         "modules": false,
@@ -17,12 +15,19 @@
             "android >= 5.1"
           ]
         },
-        "useBuiltIns": "usage"
-      }
-    ],
+        "useBuiltIns": "usage",
+        "corejs": { "version": 3, "proposals": true }
+    }],
     "@babel/preset-react"
   ],
   "plugins": [
+    ["@babel/plugin-transform-runtime", {
+      "absoluteRuntime": false,
+      "corejs": 3,
+      "helpers": true,
+      "regenerator": true,
+      "useESModules": true
+    }],
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-proposal-class-properties",
     "react-hot-loader/babel"
