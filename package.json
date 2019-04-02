@@ -30,12 +30,14 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
+    "clean-webpack-plugin": "^2.0.1",
     "css-loader": "^2.1.1",
     "error-overlay-webpack-plugin": "^0.2.0",
     "eslint": "^5.15.3",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "^1.6.0",
     "file-loader": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^1.2.3",
     "url-loader": "^1.1.2",
@@ -47,16 +49,15 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.0",
     "@babel/runtime": "^7.4.2",
-    "@hot-loader/react-dom": "^16.8.5",
+    "@hot-loader/react-dom": "^16.8.6",
     "core-js": "^3.0.0",
-    "react": "^16.8.5",
-    "react-hot-loader": "^4.8.0"
+    "react": "^16.8.6",
+    "react-hot-loader": "^4.8.2"
   },
   "scripts": {
-    "build": "npm run clean && webpack --config ./webpack/index.js --env production",
-    "build:dev": "webpack --config ./webpack/index.js --env development",
-    "clean": "rimraf build/",
+    "build": "webpack --config ./webpack/index.js --env production",
+    "build:dev": "webpack --config ./webpack/index.js --env production && python3 -m http.server 8000 --directory build",
     "refresh": "rm -rf node_modules/ package-lock.json && npm install",
-    "dev": "webpack-dev-server --config ./webpack/index.js --mode development --env development"
+    "dev": "webpack-dev-server --config ./webpack/index.js --env development"
   }
 }

@@ -1,11 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 
 module.exports = {
   mode: 'production',
+
+  context: path.resolve(__dirname, '..', 'src'),
 
   entry: {
     app: path.resolve(__dirname, '..', 'src/index.js')
@@ -13,7 +17,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, '..', 'build'),
-    publicPath: '/',
+    publicPath: './',
     filename: '[name].[hash:4].js',
     chunkFilename: '[name].[chunkhash:4].js',
     globalObject: 'this',
@@ -44,6 +48,10 @@ module.exports = {
   },
 
   optimization: {
+    runtimeChunk: {
+      name: 'manifest'
+    },
+
     splitChunks: {
       hidePathInfo: true,
       chunks: 'all',
@@ -88,6 +96,37 @@ module.exports = {
     checkWasmTypes: true
   },
   plugins: [
+    new CleanWebpackPlugin(),
+
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      meta: {
+        charset: 'utf-8',
+        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+        ['My App']: 'Barebones foundation to quickly start building your web applications'
+
+      },
+      // minify: false,
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true
+      },
+      inject: true,
+      hash: true,
+      cache: true,
+      showErrors: true,
+      chunksSortMode: 'dependency'
+    }),
+
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+
     new TerserPlugin({
       cache: true,
       parallel: true,
@@ -114,15 +153,13 @@ module.exports = {
         safari10: false,
       }
     }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
+
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    // new webpack.SourceMapDevToolPlugin({
-    //   filename: '[name].js.map',
-    //   exclude: ['vendor.js']
-    // })
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[name].js.map',
+      exclude: ['vendor.js']
+    })
   ],
 
   performance: {

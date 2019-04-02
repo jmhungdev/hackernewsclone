@@ -1,4 +1,3 @@
-import 'core-js';
 import './rhlConfig';
 
 import React from 'react';
@@ -10,6 +9,3 @@ render(
   <App title={ title } />,
   document.getElementById('root-entry')
 );
-
-
-

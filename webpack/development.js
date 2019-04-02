@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
@@ -13,6 +14,7 @@ module.exports = {
   devtool: false,
 
   devServer: {
+    allowedHosts: ['localhost:800'],
     https: false,
 
     // content not from webpack is served from here
@@ -36,7 +38,8 @@ module.exports = {
     hotOnly: true,
     inline: true,
 
-    index: path.resolve(__dirname, '..', 'src/index.html'),
+    //The filename that is considered the index file.
+    index: 'index.html',
 
     // display compilation related warnings and errors
     overlay: { warnings: true, errors: true },
@@ -103,9 +106,8 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, '..', 'build'),
-    publicPath: '/',
-    // filename: '[name].[hash:4].js',
-    filename: 'bundle.js',
+    publicPath: './',
+    filename: '[name].[hash:4].js',
     chunkFilename: '[name].[chunkhash:4].js',
     globalObject: 'this',
     pathinfo: true
@@ -162,24 +164,33 @@ module.exports = {
   },
 
   plugins: [
-    new ErrorOverlayPlugin(),
-    new CaseSensitivePathsPlugin({
-      debug: false
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      meta: {
+        charset: 'utf-8',
+        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+        ['My App']: 'Barebones foundation to quickly start building your web applications'
+
+      },
+      inject: true,
+      hash: true,
+      cache: true,
+      showErrors: true,
+      chunksSortMode: 'dependency'
     }),
 
-    new webpack.NamedModulesPlugin(),
-    new webpack.NamedChunksPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     }),
 
-    // Enable the plugin to let webpack communicate changes
-    // to WDS. --hot sets this automatically!
-    // Enable multi-pass compilation for enhanced performance
-    // in larger projects. Good default.
-    new webpack.HotModuleReplacementPlugin({
-      multiStep: false
+    new ErrorOverlayPlugin(),
+    new CaseSensitivePathsPlugin({
+      debug: false
     }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NamedChunksPlugin(),
+
     new webpack.SourceMapDevToolPlugin({
       filename: '[name].js.map',
       exclude: ['vendor.js']
@@ -188,6 +199,14 @@ module.exports = {
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 5,
       minChunkSize: 1000
+    }),
+
+    // Enable the plugin to let webpack communicate changes
+    // to WDS. --hot sets this automatically!
+    // Enable multi-pass compilation for enhanced performance
+    // in larger projects. Good default.
+    new webpack.HotModuleReplacementPlugin({
+      multiStep: false
     })
   ],
 
