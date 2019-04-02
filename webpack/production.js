@@ -45,6 +45,45 @@ module.exports = {
             // your project may benefit from this if it transpiles thousands of files.
             cacheCompression: true
           }
+        },
+      ]
+      },
+      {
+        test: /\.css$/,
+        include: path.resolve(__dirname, '..', 'src'),
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              hashPrefix: 'hash',
+              // localIdentName: '[folder]__[local]--[hash:base64:10]',
+              // localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              localIdentName: '[local]',
+              sourceMap: true,
+              importLoaders: 0,
+              import: true,
+              url: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg)$/,
+        include: path.resolve(__dirname, '..', 'src/assets'),
+        use: [{
+          loader: 'url-loader',
+          options: {
+            // Limit at 25Kb. Above that it emits separate files
+            limit: 250000,
+            name: './images/[name].[hash:4].[ext]'
+          }
         }]
       }
     ]
@@ -172,7 +211,9 @@ module.exports = {
 
   resolve: {
     alias: {
-      'react-dom': '@hot-loader/react-dom'
+      'react-dom': '@hot-loader/react-dom',
+      Images: path.resolve(__dirname, '..', `src/assets/images`),
+      Styles: path.resolve(__dirname, '..', `src/assets/styles`)
     },
     extensions: ['.js', '.json'],
     enforceExtension: false,
