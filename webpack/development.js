@@ -11,7 +11,7 @@ module.exports = {
 
   context: path.resolve(__dirname, '..', 'src'),
   cache: true,
-  devtool: false,
+  devtool: 'cheap-eval-source-map',
 
   devServer: {
     allowedHosts: ['localhost:800'],
@@ -117,7 +117,6 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: path.resolve(__dirname, '..', 'node_modules'),
         include: path.resolve(__dirname, '..', 'src'),
         use: [{
           loader: 'babel-loader',
@@ -130,6 +129,36 @@ module.exports = {
             // If you want to opt-out of cache compression, set it to false --
             // your project may benefit from this if it transpiles thousands of files.
             cacheCompression: true
+          }
+        }]
+      },
+      {
+        test: /\.css$/,
+        include: path.resolve(__dirname, '..', 'src'),
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]',
+              import: true,
+              url: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg)$/,
+        include: path.resolve(__dirname, '..', 'src/assets'),
+        use: [{
+          loader: 'url-loader',
+          options: {
+            // Limit at 25Kb. Above that it emits separate files
+            limit: 250000,
+            name: './images/[name].[hash:4].[ext]'
           }
         }]
       }
@@ -212,7 +241,9 @@ module.exports = {
 
   resolve: {
     alias: {
-      'react-dom': '@hot-loader/react-dom'
+      'react-dom': '@hot-loader/react-dom',
+      Images: path.resolve(__dirname, '..', `src/assets/images`),
+      Styles: path.resolve(__dirname, '..', `src/assets/styles`)
     },
     extensions: ['.js', '.json'],
     enforceExtension: false,

@@ -2,6 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+// const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
+// const htmlTemplate = require('./html.config');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
@@ -56,7 +59,7 @@ module.exports = {
       hidePathInfo: true,
       chunks: 'all',
       minChunks: 1,
-      minSize: 30000,
+      minSize: 10000,
       maxSize: 0,
       maxAsyncRequests: 7,
       maxInitialRequests: 5,
@@ -107,21 +110,22 @@ module.exports = {
         ['My App']: 'Barebones foundation to quickly start building your web applications'
 
       },
-      // minify: false,
-      minify: {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
-      },
+      minify: false,
+      // minify: {
+      //   collapseWhitespace: true,
+      //   removeComments: true,
+      //   removeRedundantAttributes: true,
+      //   removeScriptTypeAttributes: true,
+      //   removeStyleLinkTypeAttributes: true,
+      //   useShortDoctype: true
+      // },
       inject: true,
       hash: true,
       cache: true,
       showErrors: true,
       chunksSortMode: 'dependency'
     }),
+    // new InlineManifestWebpackPlugin('manifest'),
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')

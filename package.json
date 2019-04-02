@@ -58,6 +58,6 @@
     "build": "webpack --config ./webpack/index.js --env production",
     "build:dev": "webpack --config ./webpack/index.js --env production && python3 -m http.server 8000 --directory build",
     "refresh": "rm -rf node_modules/ package-lock.json && npm install",
-    "dev": "webpack-dev-server --config ./webpack/index.js --env development"
+    "dev": "nodemon --watch webpack --exec 'webpack-dev-server --config ./webpack/index.js --env development'"
   }
 }

@@ -1,16 +1,18 @@
 import { hot } from 'react-hot-loader/root';
 import React from 'react';
 
-import Boxy from './Boxy.js';
+import Boxy from './Boxy';
+import { header, big, env } from 'app.css';
 
 
 const App = ({ title='getting started' }) => {
   return (
-    <div>Hola!
-      <div>{ title }</div>
-      <div>{ process.env.NODE_ENV }</div>
+    <header className={header}>
+      <h1>Hola!</h1>
+      <h1 className={big}>{ title }</h1>
       <Boxy />
-    </div>
+      <div className={env}>{ process.env.NODE_ENV }</div>
+    </header>
   );
 };
 
