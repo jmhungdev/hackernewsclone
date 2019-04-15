@@ -2,11 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
-// const htmlTemplate = require('./html.config');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 
 module.exports = {
@@ -20,7 +18,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, '..', 'build'),
-    publicPath: './',
+    publicPath: '/',
     filename: '[name].[hash:4].js',
     chunkFilename: '[name].[chunkhash:4].js',
     globalObject: 'this',
@@ -45,19 +43,13 @@ module.exports = {
             // your project may benefit from this if it transpiles thousands of files.
             cacheCompression: true
           }
-        },
-      ]
+        }]
       },
       {
         test: /\.css$/,
         include: path.resolve(__dirname, '..', 'src'),
         use: [
-          {
-            loader: 'style-loader',
-            options: {
-              sourceMap: true
-            }
-          },
+          ExtractCssChunks.loader,
           {
             loader: 'css-loader',
             options: {
@@ -67,9 +59,26 @@ module.exports = {
               // localIdentName: '[path][name]__[local]--[hash:base64:5]',
               localIdentName: '[local]',
               sourceMap: true,
-              importLoaders: 0,
-              import: true,
+              importLoaders: 1,
+              import: false,
               url: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              // config: {
+              //   path: path.resolve(__dirname, '..', 'webpack'),
+              // }
+              souremap: true,
+              ident: 'postcss',
+              plugins: loader => [
+                require('postcss-import')({
+                  root: path.resolve(__dirname, '..', 'src'),
+                  path: ['assets'],
+                  skipDuplicates: true
+                })
+              ]
             }
           }
         ]
@@ -138,6 +147,15 @@ module.exports = {
     checkWasmTypes: true
   },
   plugins: [
+    new ExtractCssChunks({
+      filename: '[name].[contenthash:4].css',
+      chunkFilename: '[name].[contenthash:4].[id].css',
+      orderWarning: true, // Disable to remove warnings about conflicting order between imports
+      hot: true, // if you want HMR - we try to automatically inject hot reloading but if it's not working, add it to the config
+      // reloadAll: true, // when desperation kicks in - this is a brute force HMR flag
+      cssModules: true // if you use cssModules, this can help.
+    }),
+
     new CleanWebpackPlugin(),
 
     new HtmlWebpackPlugin({

@@ -137,15 +137,40 @@ module.exports = {
         include: path.resolve(__dirname, '..', 'src'),
         use: [
           {
-            loader: 'style-loader'
+            loader: 'style-loader',
+            options: {
+              sourceMap: true
+            }
           },
           {
             loader: 'css-loader',
             options: {
               modules: true,
+              hashPrefix: 'hash',
+              // localIdentName: '[folder]__[local]--[hash:base64:10]',
+              // localIdentName: '[path][name]__[local]--[hash:base64:5]',
               localIdentName: '[local]',
-              import: true,
+              sourceMap: true,
+              importLoaders: 1,
+              import: false,
               url: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              souremap: true,
+              ident: 'postcss',
+              plugins: () => ([
+                require('postcss-import')({
+                  root: path.resolve(__dirname, '..', 'src'),
+                  path: ['assets'],
+                  skipDuplicates: true
+                }),
+                // require('postcss-preset-env')
+                // require('autoprefixer'),
+                // require('precss')
+              ])
             }
           }
         ]
