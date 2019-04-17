@@ -6,9 +6,11 @@ import { smallSquare, bigSquare } from './styles.css';
 function Boxy() {
   return (
     <>
-    <div className={smallSquare}>small square</div>
-    <div className={bigSquare}>big square</div>
-    <footer className="globalColor">footer</footer>
+      <footer className="globalColor">footer
+        <span className="cheese">im cheese</span>
+      </footer>
+      <div className={ smallSquare }>small square</div>
+      <div className={ bigSquare }>big square</div>
     </>
   );
 }

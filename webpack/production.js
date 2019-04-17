@@ -60,7 +60,7 @@ module.exports = {
               localIdentName: '[local]',
               sourceMap: true,
               importLoaders: 1,
-              import: false,
+              import: true,
               url: true
             }
           },
@@ -73,10 +73,18 @@ module.exports = {
               souremap: true,
               ident: 'postcss',
               plugins: loader => [
-                require('postcss-import')({
-                  root: path.resolve(__dirname, '..', 'src'),
-                  path: ['assets'],
-                  skipDuplicates: true
+                // require('postcss-import')({
+                //   root: path.resolve(__dirname, '..', 'src'),
+                //   path: ['assets'],
+                //   skipDuplicates: true
+                // }),
+                require('postcss-preset-env')({
+                  stage: 3,
+                  browsers: 'last 2 versions',
+                  autoprefixer: { grid: true },
+                  features: {
+                    'nesting-rules': true
+                  }
                 })
               ]
             }
@@ -146,6 +154,7 @@ module.exports = {
     minimize: true,
     checkWasmTypes: true
   },
+
   plugins: [
     new ExtractCssChunks({
       filename: '[name].[contenthash:4].css',
