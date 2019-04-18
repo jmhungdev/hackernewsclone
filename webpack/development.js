@@ -1,27 +1,15 @@
-const webpack = require('webpack');
 const path = require('path');
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
+const webpack = require('webpack');
+
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = {
-  context: path.resolve(__dirname, '..', 'src'),
+  mode: 'development',
   devtool: 'eval-source-map',
-
-  entry: {
-    app: [ './index.js' ]
-  },
-
-  output: {
-    path: path.resolve(__dirname, '..', 'build'),
-    publicPath: './',
-    filename: '[name].[hash:4].js',
-    chunkFilename: '[name].[chunkhash:4].js',
-    globalObject: 'this',
-    pathinfo: true
-  },
 
   devServer: {
     https: false,
@@ -87,21 +75,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: path.resolve(__dirname, '..', 'src'),
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              // This is a feature of `babel-loader` for Webpack (not Babel itself).
-              // It enables caching results in ./node_modules/.cache/babel-loader/
-              // directory for faster rebuilds.
-              cacheDirectory: true
-            }
-          }
-        ]
-      },
-      {
         test: /\.css$/,
         include: path.resolve(__dirname, '..', 'src'),
         use: [
@@ -147,18 +120,6 @@ module.exports = {
             }
           }
         ]
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg)$/,
-        include: path.resolve(__dirname, '..', 'src/assets/images'),
-        use: [{
-          loader: 'url-loader',
-          options: {
-            // Limit at 25Kb. Above that it emits separate files
-            limit: 25000,
-            name: './images/[name].[hash:4].[ext]'
-          }
-        }]
       }
     ]
   },
@@ -204,23 +165,16 @@ module.exports = {
       chunksSortMode: 'dependency'
     }),
 
-    new ExtractCssChunks(
-      {
-        // Options similar to the same options in webpackOptions.output
-        // both options are optional
-        filename: '[name].css',
-        chunkFilename: '[id].css',
-        orderWarning: true // Disable to remove warnings about conflicting order between imports
-      }
-    ),
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 5,
       minChunkSize: 1000
     }),
 
+    //see webpack.EnvironmentPlugin(["NODE_ENV"])
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('development')
+        NODE_ENV: JSON.stringify('development'),
+        ciao: JSON.stringify('hola desde el base-config')
       }
     }),
 
@@ -241,25 +195,6 @@ module.exports = {
     new webpack.SourceMapDevToolPlugin({
       filename: '[name].js.map',
       exclude: ['vendor.js']
-    }),
-
-    //see webpack.EnvironmentPlugin(["NODE_ENV"])
-    new webpack.DefinePlugin({
-      'HOLA': JSON.stringify('hola desde el base-config')
     })
-  ],
-
-  resolve: {
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-      Images: path.resolve(__dirname, '..', `src/assets/images`),
-      Styles: path.resolve(__dirname, '..', `src/assets/styles`)
-    },
-    extensions: ['.js', '.json'],
-    enforceExtension: false,
-    modules: [
-      path.resolve(__dirname, '..', 'src'),
-      'node_modules'
-    ]
-  }
+  ]
 };

@@ -1,7 +1,7 @@
 import { hot } from 'react-hot-loader/root';
 import React from 'react';
 
-import Boxy from './Boxy';
+import Boxy from 'Components/Boxy';
 import { header, big, env } from 'app.css';
 
 

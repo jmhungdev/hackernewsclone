@@ -1,50 +1,18 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 
 module.exports = {
   mode: 'production',
 
-  context: path.resolve(__dirname, '..', 'src'),
-
-  entry: {
-    app: path.resolve(__dirname, '..', 'src/index.js')
-  },
-
-  output: {
-    path: path.resolve(__dirname, '..', 'build'),
-    publicPath: '/',
-    filename: '[name].[hash:4].js',
-    chunkFilename: '[name].[chunkhash:4].js',
-    globalObject: 'this',
-    pathinfo: true
-  },
-
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: path.resolve(__dirname, '..', 'node_modules'),
-        include: path.resolve(__dirname, '..', 'src'),
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            // This is a feature of `babel-loader` for Webpack (not Babel itself).
-            // It enables caching results in ./node_modules/.cache/babel-loader/
-            // directory for faster rebuilds.
-            cacheDirectory: true,
-            // When set, each Babel transform output will be compressed with Gzip.
-            // If you want to opt-out of cache compression, set it to false --
-            // your project may benefit from this if it transpiles thousands of files.
-            cacheCompression: true
-          }
-        }]
-      },
       {
         test: /\.css$/,
         include: path.resolve(__dirname, '..', 'src'),
@@ -90,18 +58,6 @@ module.exports = {
             }
           }
         ]
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg)$/,
-        include: path.resolve(__dirname, '..', 'src/assets'),
-        use: [{
-          loader: 'url-loader',
-          options: {
-            // Limit at 25Kb. Above that it emits separate files
-            limit: 250000,
-            name: './images/[name].[hash:4].[ext]'
-          }
-        }]
       }
     ]
   },
@@ -154,21 +110,13 @@ module.exports = {
     minimize: true,
     checkWasmTypes: true
   },
+  performance: {
+    hints: 'warning'
+  },
 
   plugins: [
-    new ExtractCssChunks({
-      filename: '[name].[contenthash:4].css',
-      chunkFilename: '[name].[contenthash:4].[id].css',
-      orderWarning: true, // Disable to remove warnings about conflicting order between imports
-      hot: true, // if you want HMR - we try to automatically inject hot reloading but if it's not working, add it to the config
-      // reloadAll: true, // when desperation kicks in - this is a brute force HMR flag
-      cssModules: true // if you use cssModules, this can help.
-    }),
-
-    new CleanWebpackPlugin(),
-
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      title: 'react ❤ webpack',
       template: 'index.html',
       meta: {
         charset: 'utf-8',
@@ -191,10 +139,18 @@ module.exports = {
       showErrors: true,
       chunksSortMode: 'dependency'
     }),
+
+    new CleanWebpackPlugin(),
     // new InlineManifestWebpackPlugin('manifest'),
 
+    new CaseSensitivePathsPlugin({
+      debug: true
+    }),
+
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
     }),
 
     new TerserPlugin({
@@ -225,29 +181,7 @@ module.exports = {
     }),
 
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.SourceMapDevToolPlugin({
-      filename: '[name].js.map',
-      exclude: ['vendor.js']
-    })
-  ],
-
-  performance: {
-    hints: 'warning'
-  },
-
-  resolve: {
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-      Images: path.resolve(__dirname, '..', `src/assets/images`),
-      Styles: path.resolve(__dirname, '..', `src/assets/styles`)
-    },
-    extensions: ['.js', '.json'],
-    enforceExtension: false,
-    modules: [
-      path.resolve(__dirname, '..', 'src'),
-      'node_modules'
-    ]
-  }
+    new webpack.NoEmitOnErrorsPlugin()
+  ]
 };
 
