@@ -8,6 +8,8 @@ module.exports = {
   contextPath: path.resolve(__dirname, '..', appRoot),
 
   cssPaths: [
+    path.resolve(__dirname, '..', `${appRoot}`),
+
     path.resolve(__dirname, '..', `${appRoot}/assets/styles`),
     path.resolve(__dirname, '..', `${appRoot}/assets/fonts`),
     path.resolve(__dirname, '..', `${appRoot}/components`),
@@ -27,7 +29,7 @@ module.exports = {
   // 0.0.0.0 is available to all network devices
   // unlike default `localhost`.
   host: process.env.HOST, // Defaults to `localhost`
-  port: process.env.PORT || 8001, // Defaults to 8080
+  port: process.env.PORT || 8000, // Defaults to 8080
 
   imagePathEntry: [path.resolve(__dirname, '..', `${appRoot}/assets/images`)],
   imagePathOutput: 'assets/images/[name].[hash:4].[ext]',

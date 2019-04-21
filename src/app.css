@@ -1,5 +1,8 @@
+@import '~Styles/variables.scss';
+
+
 .header {
-  background-color: green;
+  background-color: $visitedRed;
 }
 
 .big {

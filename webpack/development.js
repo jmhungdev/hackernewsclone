@@ -1,6 +1,6 @@
-const path = require('path');
 const webpack = require('webpack');
 
+const { contentBasePath, cssPaths, host, port } = require('./base-params');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
@@ -13,11 +13,11 @@ module.exports = {
 
   devServer: {
     https: false,
-    host: 'localhost',
-    port: 8000,
+    host,
+    port,
 
     open: false,                  // Open the page in browser
-    contentBase: path.resolve(__dirname, '..', 'src'), // Content not from webpack is served from here
+    contentBase: contentBasePath, // Content not from webpack is served from here
 
     historyApiFallback: true,
     compress: true,
@@ -75,8 +75,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        include: path.resolve(__dirname, '..', 'src'),
+        test: /\.(css|scss)$/,
+        include: cssPaths,
         use: [
           {
             loader: ExtractCssChunks.loader,
@@ -97,26 +97,12 @@ module.exports = {
             }
           },
           {
-            loader: 'postcss-loader',
+            loader: 'sass-loader',
             options: {
-              souremap: true,
-              ident: 'postcss',
-              plugins: () => ([
-                // require('postcss-import')({
-                //   root: path.resolve(__dirname, '..', 'src'),
-                //   path: ['assets', 'src'],
-                //   skipDuplicates: true
-                // })
-                require('postcss-preset-env')({
-                  stage: 3,
-                  browsers: 'last 2 versions',
-                  autoprefixer: { grid: true },
-                  features: {
-                    'nesting-rules': true
-                  }
-                })
-                // require('precss')({
-              ])
+              sourceMap: true,
+              includePaths: cssPaths,
+              outputStyle: 'expanded',
+              precision: 8
             }
           }
         ]
@@ -156,8 +142,11 @@ module.exports = {
       title: 'react ❤ webpack',
       template: 'index.html',
       // favicon: '',
-      // meta: { viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
-      // minify: {Boolean|Object}
+      meta: {
+        charset: 'utf-8',
+        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+        ['My App']: 'Barebones foundation to quickly start building your web applications'
+      },
       inject: true,
       hash: true,
       cache: true,

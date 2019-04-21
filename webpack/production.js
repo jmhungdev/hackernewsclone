@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const { cssPaths } = require('./base-params');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
@@ -14,8 +15,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        include: path.resolve(__dirname, '..', 'src'),
+        test: /\.(css|scss)$/,
+        include: cssPaths,
         use: [
           ExtractCssChunks.loader,
           {
@@ -33,28 +34,12 @@ module.exports = {
             }
           },
           {
-            loader: 'postcss-loader',
+            loader: 'sass-loader',
             options: {
-              // config: {
-              //   path: path.resolve(__dirname, '..', 'webpack'),
-              // }
-              souremap: true,
-              ident: 'postcss',
-              plugins: loader => [
-                // require('postcss-import')({
-                //   root: path.resolve(__dirname, '..', 'src'),
-                //   path: ['assets'],
-                //   skipDuplicates: true
-                // }),
-                require('postcss-preset-env')({
-                  stage: 3,
-                  browsers: 'last 2 versions',
-                  autoprefixer: { grid: true },
-                  features: {
-                    'nesting-rules': true
-                  }
-                })
-              ]
+              sourceMap: true,
+              includePaths: cssPaths,
+              outputStyle: 'expanded',
+              precision: 8
             }
           }
         ]
@@ -122,7 +107,6 @@ module.exports = {
         charset: 'utf-8',
         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
         ['My App']: 'Barebones foundation to quickly start building your web applications'
-
       },
       minify: false,
       // minify: {
