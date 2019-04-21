@@ -63,19 +63,25 @@ module.exports = {
       automaticNameDelimiter: '~',
       name: false,
       cacheGroups: {
-        vendors: {
-          name: 'vendors',
-          test: /[\\/]node_modules[\\/](react|react-dom|core-js|react-hot-loader)[\\/]/,
-          // test: /[\\/]node_modules[\\/]/,
-          priority: -10,
+        default: false,
+        vendors: false,
+
+        vendor: {
+          name: 'vendor',
+          // test: /[\\/]node_modules[\\/](react|react-dom|core-js|react-hot-loader)[\\/]/,
+          test: /node_modules/,
           chunks: 'all',
+          priority: 20,
           // filename: '[name].vendor-bundle.js',
           enforce: true
         },
-        default: {
+        common: {
+          name: 'common',
           minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
+          chunks: 'all',
+          priority: 10,
+          reuseExistingChunk: true,
+          enforce: true
         }
       }
     },
