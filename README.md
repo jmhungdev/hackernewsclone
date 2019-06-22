@@ -1,3 +1,10 @@
-# App Trestle
+# Let's build a Hacker News Feed!
 
-Web applications arise from different technologies that converge to a singular product. Webpack serves as the trestle that supports your application's disparate technologies to give way to a rigid frame to which to build upon. App Trestle is the barebones of a foundation to quickly start building your web application. As the trestle of your applicatoin the foundation can be extended by adding any library that spans the webpack ecosystem.
+## Applications that have been built around Hacker News
+
+* https://hn.premii.com
+* https://hackerweb.app/
+* https://hnpwa.com/
+* https://hckrnews.com/
+* https://hnleaderboard.com/?
+* https://new-hn.algolia.com/?experimental&sort=byPopularity&prefix&page=0&dateRange=all&type=story

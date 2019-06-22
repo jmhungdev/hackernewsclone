@@ -2,11 +2,14 @@ import './rhlConfig';
 
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App.js';
+import { BrowserRouter } from 'react-router-dom';
+
+import Root from './Root.js';
 
 
-const title = 'A minililbit of React & Webpack';
 render(
-  <App title={ title } />,
+  <BrowserRouter>
+    <Root />
+  </BrowserRouter>,
   document.getElementById('root-entry')
 );

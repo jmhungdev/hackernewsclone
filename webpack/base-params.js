@@ -35,8 +35,7 @@ module.exports = {
   imagePathOutput: 'assets/images/[name].[hash:4].[ext]',
 
   jsPaths: [
-    path.resolve(__dirname, '..', `${appRoot}/App.js`),
-
+    path.resolve(__dirname, '..', `${appRoot}/Root.js`),
     path.resolve(__dirname, '..', `${appRoot}/piperouter`),
     path.resolve(__dirname, '..', `${appRoot}/components`),
     path.resolve(__dirname, '..', `${appRoot}/configureStore.js`),
@@ -60,6 +59,7 @@ module.exports = {
     Components: path.resolve(__dirname, '..', `${appRoot}/components`),
     Elements: path.resolve(__dirname, '..', `${appRoot}/elements`),
     Events: path.resolve(__dirname, '..', `${appRoot}/events`),
+    Fonts: path.resolve(__dirname, '..', `${appRoot}/assets/fonts`),
     Gateway: path.resolve(__dirname, '..', `${appRoot}/gateway`),
     Images: path.resolve(__dirname, '..', `${appRoot}/assets/images`),
     Lib: path.resolve(__dirname, '..', `${appRoot}/lib`),
