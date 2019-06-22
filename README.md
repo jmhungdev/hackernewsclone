@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Let's build a Hacker News Feed!
 
 ## Applications that have been built around Hacker News
