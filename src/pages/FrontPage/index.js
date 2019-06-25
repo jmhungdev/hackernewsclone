@@ -8,7 +8,7 @@ async function fetchStory(articleId) {
     const results = await response.json();
     return results;
   } catch(error) {
-    return {error}
+    return { error }
   }
 }
 
@@ -42,7 +42,7 @@ async function fetchStories() {
     const results = await response.json();
     return results;
   } catch(error) {
-    return {error}
+    return { error }
   }
 }
 
@@ -50,16 +50,16 @@ async function fetchTopStories(limit) {
   const _stories = await fetchStories();
 
   if(_stories.error) {
-    return {isLoading: false, isError: true, stories: []}
+    return { isLoading: false, isError: true, stories: [] }
   }
 
   const storyIds = _stories.slice(0,limit);
   const storyPromises = storyIds.map(async storyId => await fetchStory(storyId));
   const stories = await Promise.all(storyPromises);
   if(stories.some(story => story.error)) {
-    return {isLoading: false, isError: true, stories: []}
+    return { isLoading: false, isError: true, stories: [] }
   }
-  return {isLoading: false , isError: false, stories}
+  return { isLoading: false , isError: false, stories }
 }
 
 const useFetchTopStories = limit => {
@@ -78,12 +78,12 @@ const useFetchTopStories = limit => {
     fetchData();
   }, []);
 
-  return {isLoading, isError, stories};
+  return { isLoading, isError, stories };
 };
 
 function TopStories() {
   // const stories = useFetchTopStories();
-  const {isLoading, isError, stories} = useFetchTopStories(10);
+  const { isLoading, isError, stories } = useFetchTopStories(10);
 
   return isError
   ? <div>Something went wrong...</div>
