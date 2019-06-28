@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react';
+import SearchBar from './SearchBar';
+import SearchList from './SearchList';
 
 
 const dataFetchReducer = (state, action) => {
@@ -41,7 +43,6 @@ const useDataAPI = (initUrl, initData) => {
       try {
         const response = await fetch(url, { method: 'GET', mode: 'cors' });
         const results = await response.json();
-
         // setData({ hits: results.hits });
         dispatch({ type: 'FETCH_SUCCESS', payload: results.hits });
       } catch (err) {
@@ -61,7 +62,6 @@ const useDataAPI = (initUrl, initData) => {
 };
 
 function Search() {
-  const [query, setQuery] = useState('redux');
   const { data, isLoading, isError, doFetch } = useDataAPI(
     'http://hn.algolia.com/api/v1/search?query=redux',
     { hits: [] }
@@ -69,24 +69,14 @@ function Search() {
 
   return (
     <>
-      <input
-        type="text"
-        value={ query }
-        onChange={ event => setQuery(event.target.value) } />
-      <button type="button" onClick={ () => doFetch(`http://hn.algolia.com/api/v1/search?query=${query}`) }>
-        Search
-      </button>
-
-      {isError && <div>Something went wrong ...</div>}
+      <SearchBar doFetch={doFetch} />
 
       {isLoading
         ? (<div>Loading ...</div>)
-        : (<ul>
-          {data.hits.map(item => (
-            <li key={ item.objectID }>
-              <a href={ item.url }>{item.title}</a>
-            </li>))}
-        </ul>)
+        : (isError
+          ? <div>Something went wrong ...</div>
+          : <SearchList data={data} />
+        )
       }
     </>
   );
