@@ -8,7 +8,7 @@ function DomainList({ domains }) {
         <tr key={ domain.url } className={ row }>
             <td className={ td }>{ index + 1 }. </td>
             <td className={ td }>{ domain.url }</td>
-            <td className={ td }>{ domain.score }</td>  
+            <td className={ td }>{ domain.score }</td>
             <td className={ td }>{ domain.numPosts }</td>
         </tr> ))}
     </>

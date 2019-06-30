@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { listTop, searchTitle, searchInput, searchButton } from './styles.css';
 
 
-function SearchBar({ doFetch }) {
-  const [query, setQuery] = useState('redux');
+function SearchBar({ performSearch }) {
+  const [searchTerm, setSearchTerm] = useState('reactjs');
+
+  useEffect(() => {
+    performSearch(searchTerm);
+  }, []);
 
   return (
     <header className={listTop}>
@@ -11,9 +15,9 @@ function SearchBar({ doFetch }) {
       <input
         className={searchInput}
         type="text"
-        value={ query }
-        onChange={ event => setQuery(event.target.value) } />
-      <button className={ searchButton } type="button" onClick={ () => doFetch(`http://hn.algolia.com/api/v1/search?query=${query}`) }>
+        value={searchTerm}
+        onChange={evt => setSearchTerm(evt.target.value)} />
+      <button className={ searchButton } type="button" onClick={() => performSearch(searchTerm)}>
         Search
       </button>
     </header>

@@ -7,8 +7,8 @@ import { story, stories, title } from './styles.css';
 function SearchList({ data }) {
   return (
     <ul className={stories}>
-      {data.hits.map(item => {
-        const url = new URL(item.url);
+      {data.map(item => {
+        const url = item.url ? new URL(item.url) : '';
         const timeAgo = distanceInWordsToNow(item.created_at, { addSuffix: true });
         const userLink = `https://news.ycombinator.com/user?id=${item.author}`;
         const commentLink = `https://news.ycombinator.com/item?id=${item.objectID}`;
@@ -23,10 +23,10 @@ function SearchList({ data }) {
               <span> | <a href={ userLink }>{ item.author }</a> </span>
               <span> | { timeAgo } </span>
               <span> | <a href={ commentLink }>{ item.num_comments } comments</a> </span>
-              <span> | <a href={ 'http://' + url.hostname }>{ url.hostname }</a> </span>
+              {url && <span> | <a href={ 'http://' + url.hostname }>{ url.hostname }</a> </span>}
             </div>
           </li>
-        )
+        );
       })}
     </ul>
   );

@@ -58,9 +58,11 @@ module.exports = {
     'react-dom': '@hot-loader/react-dom',
     Components: path.resolve(__dirname, '..', `${appRoot}/components`),
     Elements: path.resolve(__dirname, '..', `${appRoot}/elements`),
+    Endpoints: path.resolve(__dirname, '..', `${appRoot}/endpoints`),
     Events: path.resolve(__dirname, '..', `${appRoot}/events`),
     Fonts: path.resolve(__dirname, '..', `${appRoot}/assets/fonts`),
     Gateway: path.resolve(__dirname, '..', `${appRoot}/gateway`),
+    Hooks: path.resolve(__dirname, '..', `${appRoot}/hooks`),
     Images: path.resolve(__dirname, '..', `${appRoot}/assets/images`),
     Lib: path.resolve(__dirname, '..', `${appRoot}/lib`),
     PipeRouter: path.resolve(__dirname, '..', `${appRoot}/piperouter`),
@@ -69,7 +71,8 @@ module.exports = {
     Services: path.resolve(__dirname, '..', `${appRoot}/services`),
     Shared: path.resolve(__dirname, '..', `${appRoot}/components/shared`),
     Store: path.resolve(__dirname, '..', `${appRoot}/configureStore.js`),
-    Styles: path.resolve(__dirname, '..', `${appRoot}/assets/styles`)
+    Styles: path.resolve(__dirname, '..', `${appRoot}/assets/styles`),
+    Utils: path.resolve(__dirname, '..', `${appRoot}/utils`)
   },
   resolveAliasModules: [
     path.resolve(__dirname, '..', appRoot),
