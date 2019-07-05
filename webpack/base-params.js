@@ -8,12 +8,11 @@ module.exports = {
   contextPath: path.resolve(__dirname, '..', appRoot),
 
   cssPaths: [
-    path.resolve(__dirname, '..', `${appRoot}`),
-
     path.resolve(__dirname, '..', `${appRoot}/assets/styles`),
     path.resolve(__dirname, '..', `${appRoot}/assets/fonts`),
     path.resolve(__dirname, '..', `${appRoot}/components`),
     path.resolve(__dirname, '..', `${appRoot}/elements`),
+    path.resolve(__dirname, '..', `${appRoot}/layouts`),
     path.resolve(__dirname, '..', `${appRoot}/pages`),
     path.resolve(__dirname, '..', `${appRoot}/shared`)
   ],
@@ -42,6 +41,7 @@ module.exports = {
     path.resolve(__dirname, '..', `${appRoot}/elements`),
     path.resolve(__dirname, '..', `${appRoot}/gateway`),
     path.resolve(__dirname, '..', `${appRoot}/index.js`),
+    path.resolve(__dirname, '..', `${appRoot}/layouts`),
     path.resolve(__dirname, '..', `${appRoot}/lib`),
     path.resolve(__dirname, '..', `${appRoot}/logger.js`),
     path.resolve(__dirname, '..', `${appRoot}/pages`),
@@ -64,6 +64,7 @@ module.exports = {
     Gateway: path.resolve(__dirname, '..', `${appRoot}/gateway`),
     Hooks: path.resolve(__dirname, '..', `${appRoot}/hooks`),
     Images: path.resolve(__dirname, '..', `${appRoot}/assets/images`),
+    Layouts: path.resolve(__dirname, '..', `${appRoot}/layouts`),
     Lib: path.resolve(__dirname, '..', `${appRoot}/lib`),
     PipeRouter: path.resolve(__dirname, '..', `${appRoot}/piperouter`),
     Pages: path.resolve(__dirname, '..', `${appRoot}/pages`),

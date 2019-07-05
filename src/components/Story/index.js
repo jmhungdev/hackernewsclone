@@ -20,19 +20,19 @@ function Story({ index, story }) {
     <article>
       <header>
         <span>{ index + 1 }</span>
-        <h1 className={title}>Title: {story.title}</h1>
+        <h1 className={title}>{story.title}</h1>
         <span className={id}>{ story.id }</span>
       </header>
       <section>
         <header>
-          <h2 className={url}>URL: {story.url}</h2>
+          <h2 className={url}>{story.url}</h2>
         </header>
         {/* <!-- cheesy content --> */}
       </section>
       <section>
         <header className={footer}>
-          <h3 className={score}>Score: {story.score}</h3>
-          <h3 className={score}>Time: {formatUnixTime(story.time)}</h3>
+          <h3 className={score}>Points: {story.score}</h3>
+          <h3 className={score}>{formatUnixTime(story.time)}</h3>
         </header>
         {/* <!-- more cheesy content --> */}
       </section>

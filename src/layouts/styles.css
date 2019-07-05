@@ -1,0 +1,15 @@
+.mainGridLayout {
+  display: grid;
+  grid-template-columns: auto [main] minmax(auto, 700px) auto;
+  grid-template-rows: [header] auto 30px [content] auto;
+}
+
+.headerGrid {
+  grid-column: main;
+  grid-row: header;
+}
+
+ .contentGrid {
+  grid-column: main;
+  grid-row: content;
+}
