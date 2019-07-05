@@ -51,6 +51,7 @@ module.exports = {
     path.resolve(__dirname, '..', `${appRoot}/shared`)
   ],
 
+  logoPath: path.resolve(__dirname, '..', `${appRoot}/assets/images`),
   outputPath: path.resolve(__dirname, '..', 'build'),
   postcssPaths: path.resolve(__dirname, '..', appRoot),
 

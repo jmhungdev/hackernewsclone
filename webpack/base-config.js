@@ -2,10 +2,11 @@ const webpack = require('webpack');
 
 const {
   appEntry, contextPath, fontPathEntry,
-  imagePathEntry, jsPaths, outputPath,
+  imagePathEntry, jsPaths, logoPath, outputPath,
   resolveAliasPaths, resolveAliasModules
 } = require('./base-params');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 
 module.exports = {
@@ -83,6 +84,25 @@ module.exports = {
         cssModules: true // if you use cssModules, this can help.
       }
     ),
+
+    new FaviconsWebpackPlugin({
+      logo: `${logoPath}/blue-white-logo.png`,
+      title: 'web fountain',
+      prefix: 'icons-[hash]/',
+      persistentCache: true,
+      icons: {
+        android: false,
+        appleIcon: false,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
+      }
+    }),
 
     new webpack.SourceMapDevToolPlugin({
       filename: '[name].js.map',
