@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 const { cssPaths } = require('./base-params');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');

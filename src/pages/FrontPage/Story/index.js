@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { id, title, url, score, footer } from './styles.scss';
 
 function Story({ index, story }) {
   function formatUnixTime(unixTime) {
@@ -19,19 +20,19 @@ function Story({ index, story }) {
     <article>
       <header>
         <span>{ index + 1 }</span>
-        <h1>Title: {story.title}</h1>
-        <span>{ story.id }</span>
+        <h1 className={title}>Title: {story.title}</h1>
+        <span className={id}>{ story.id }</span>
       </header>
       <section>
         <header>
-          <h2>URL: {story.url}</h2>
+          <h2 className={url}>URL: {story.url}</h2>
         </header>
         {/* <!-- cheesy content --> */}
       </section>
       <section>
-        <header>
-          <h3>Score: {story.score}</h3>
-          <h3>Time: {formatUnixTime(story.time)}</h3>
+        <header className={footer}>
+          <h3 className={score}>Score: {story.score}</h3>
+          <h3 className={score}>Time: {formatUnixTime(story.time)}</h3>
         </header>
         {/* <!-- more cheesy content --> */}
       </section>

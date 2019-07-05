@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'Bitstream Iowan Old Style Black';
+  src: url(~Fonts/iowan-old-style-black.woff) format('woff');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Bitstream Iowan Old Style Bold';
+  src: url(~Fonts/iowan-old-style-bold.woff) format('woff');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Bitstream Iowan Old Style Bold Italic';
+  src: url(~Fonts/iowan-old-style-bold-italic.woff) format('woff');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Bitstream Iowan Old Style Roman';
+  src: url(~Fonts/iowan-old-style-roman.woff) format('woff');
+  font-style: normal;
+  font-weight: normal;
+}
+
+%font-optimizing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+@mixin black {
+  @extend %font-optimizing;
+  font-family: 'Bitstream Iowan Old Style Black';
+  font-style: normal;
+  font-weight: normal;
+}
+
+@mixin bold {
+  @extend %font-optimizing;
+  font-family: 'Bitstream Iowan Old Style Bold';
+  font-style: normal;
+  font-weight: normal;
+}
+
+@mixin boldItalic {
+  @extend %font-optimizing;
+  font-family: 'Bitstream Iowan Old Style Bold Italic';
+  font-style: normal;
+  font-weight: normal;
+}
+
+@mixin roman {
+  @extend %font-optimizing;
+  font-family: 'Bitstream Iowan Old Style Roman';
+  font-style: normal;
+  font-weight: normal;
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
