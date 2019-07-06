@@ -1,30 +1,38 @@
 import React from 'react';
 
-import { table } from './styles.css';
-import DomainHeader from './DomainHeader';
-import DomainList from './DomainList';
-
-import { getTopDomainsFromStories } from 'Utils';
 import { useHNStories } from 'Hooks';
-import { BEST_STORIES } from 'Endpoints';
+import { TOP_STORIES, BEST_STORIES } from 'Endpoints';
+import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
+import { getTopDomainsFromStories } from 'Utils';
+
+import ReactWeekend from 'Components/ReactWeekend';
+import DomainTable from 'Components/DomainTable';
+import Button from 'Elements/Button';
+
+import { header } from './styles.scss';
 
 
 function TopDomains() {
-  const { isLoading, isError, stories } = useHNStories(BEST_STORIES, 100);
+  const { stories } = useHNStories(TOP_STORIES, 100);
   const domains = getTopDomainsFromStories(stories);
 
-  return isError
-    ? (<div style={{ color: 'red' }}>Something went wrong...</div>)
-    : (isLoading
-      ? <div>...Loading...</div>
-      : (
-        <table className={table}>
-          <tbody>
-            <DomainHeader />
-            <DomainList domains={domains} />
-          </tbody>
-        </table>
-      ));
+  return (
+    <MainGridLayout>
+      <HeaderGrid>
+        <header className={header}>
+          <ReactWeekend />
+          <div>
+            <Button onClick={() => console.log('top stories')}>Top Stories</Button>
+            <Button onClick={() => console.log('best stories')}>Best Stories</Button>
+          </div>
+        </header>
+      </HeaderGrid>
+
+      <ContentGrid>
+        <DomainTable domains={domains} />
+      </ContentGrid>
+    </MainGridLayout>
+  );
 }
 
 
