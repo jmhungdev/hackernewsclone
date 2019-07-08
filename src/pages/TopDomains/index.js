@@ -13,7 +13,7 @@ import { header } from './styles.scss';
 
 
 function TopDomains() {
-  const { stories } = useHNStories(TOP_STORIES, 100);
+  const { stories } = useHNStories(BEST_STORIES, 100);
   const domains = getTopDomainsFromStories(stories);
 
   return (

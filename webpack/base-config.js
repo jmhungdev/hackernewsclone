@@ -88,7 +88,7 @@ module.exports = {
     new FaviconsWebpackPlugin({
       logo: `${logoPath}/blue-white-logo.png`,
       title: 'web fountain',
-      prefix: 'icons-[hash]/',
+      prefix: 'icons-[hash:4]/',
       persistentCache: true,
       icons: {
         android: false,

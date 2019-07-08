@@ -1,12 +1,51 @@
-.td {
-  padding: 8px;
-  border-bottom: 1px solid black;
+@import '~Styles/fonts.scss';
+@import '~Styles/variables.scss';
+
+
+.rowGrid {
+  display: grid;
+  grid-template-columns: 30px [domain] minmax(60px, 236px) [score] minmax(60px, 140px) [posts] minmax(60px, 159px) [points] minmax(60px, 135px);
+  grid-template-rows: auto;
+  align-items: center;
+  height: 40px;
+
+  font-size: 16px;
+
+  border-top: 1px solid $off-white;
+  border-right: 1px solid $off-white;
+  border-left: 1px solid $off-white;
+  border-bottom: 0;
 }
 
-.row:nth-child(even) {
-  background-color: #FFFFF0;
+.rankStyle {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+}
+.domainStyle {
+  @include boldItalic;
+  grid-column: domain;
+  grid-row: 1;
+  padding-left: 34px;
+  width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.row:nth-child(odd) {
-  background-color: #F9F6E3;
+.rankStyle, .scoreStyle, .postsStyle, .pointsStyle {
+  @include bold;
+}
+
+.scoreStyle {
+  grid-column: score;
+  grid-row: 1;
+}
+.postsStyle {
+  grid-column: posts;
+  grid-row: 1;
+}
+.pointsStyle {
+  grid-column: points;
+  grid-row: 1;
 }

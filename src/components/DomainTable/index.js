@@ -1,23 +1,25 @@
 import React from 'react';
 
 import Row from './Row';
-import { table, firstRow } from './styles.scss';
+import {
+  tableHead, domainStyle, scoreStyle,
+  postsStyle, pointsStyle, list
+} from './styles.scss';
 
 
 function DomainTable({ domains }) {
   return (
-    <table className={table}>
-      <tbody>
-        <tr className={firstRow}>
-          <th />
-          <th>Domain</th>
-          <th>Score</th>
-          <th># Posts</th>
-          <th>Mean Points</th>
-        </tr>
+    <>
+      <header className={tableHead}>
+        <span className={domainStyle}>Domain</span>
+        <span className={scoreStyle}>Score</span>
+        <span className={postsStyle}># Posts</span>
+        <span className={pointsStyle}>Mean Points</span>
+      </header>
+      <ul className={list}>
         {domains.map(domain => <Row key={domain.url} domain={domain} />)}
-      </tbody>
-    </table>
+      </ul>
+    </>
   );
 }
 
