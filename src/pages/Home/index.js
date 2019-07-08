@@ -12,7 +12,7 @@ import { header } from './styles.css';
 
 
 function Home() {
-  const { stories } = useHNStories(TOP_STORIES, 10);
+  const { stories } = useHNStories(TOP_STORIES, 20);
 
   return (
     <MainGridLayout>

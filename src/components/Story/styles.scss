@@ -1,28 +1,64 @@
 @import '~Styles/fonts.scss';
+@import '~Styles/variables.scss';
 
 
-.title {
-  @include bold;
-  font-size: 18px;
-}
-
-.url {
-  @include boldItalic;
-  font-size: 13px;
-}
-
-.score {
-  @include roman;
-  font-size: 13px;
-}
-
-.id {
-  @include black;
-  font-size: 16px;
-}
-
-.footer {
+.article {
   display: flex;
   flex-flow: row nowrap;
+  padding: 10px 30px 8px 10px;
+  border-top: 1px solid $off-white;
+  border-right: 1px solid $off-white;
+  border-bottom: 0;
+  border-left: 1px solid $off-white;
 
+  &:last-child {
+    border-bottom: 1px solid $off-white;
+  }
+}
+
+.articleId {
+  // margin-right: 15px;
+}
+
+.articleMeta {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-left: 15px;
+}
+
+.articleTitle {
+  margin: 0;
+  margin-bottom: 5px;
+  color: $black-blue;
+}
+
+.articleUrl {
+  margin-bottom: 5px;
+  @include boldItalic;
+  font-size: 13px;
+  color: $black-blue;
+}
+
+footer {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  .articleScore, .articleBy, .articleTime {
+    display: inline-block;
+    margin-right: 10px;
+    @include roman;
+    font-size: 13px;
+    color: $black-blue;
+
+    span {
+      margin-left: 5px;
+    }
+  }
+}
+
+.commentCloud {
+  align-self: center;
+  margin-left: auto;
+  cursor: pointer;
 }

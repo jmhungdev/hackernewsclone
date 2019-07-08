@@ -1,41 +1,50 @@
 import React from 'react';
 
-import { id, title, url, score, footer } from './styles.scss';
+import HX from 'Elements/HX';
+import {
+  Star as StarIcon,
+  Profile as ProfileIcon,
+  Calendar as CalendarIcon,
+  CommentCloud as CommentCloudIcon
+} from 'Elements/Icons';
+import { formatUnixTime } from 'Utils';
+import {
+  article, articleMeta, articleId,
+  articleTitle, articleUrl, articleScore,
+  articleBy, articleTime, commentCloud
+} from './styles.scss';
+
 
 function Story({ index, story }) {
-  function formatUnixTime(unixTime) {
-    const options = {
-      year: 'numeric',
-      day: 'numeric',
-      month: 'long',
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit'
-    };
-    const time = new Date(unixTime * 1000).toLocaleTimeString('en-US', options);
-    return time;
-  }
-
   return (
-    <article>
-      <header>
-        <span>{ index + 1 }</span>
-        <h1 className={title}>{story.title}</h1>
-        <span className={id}>{ story.id }</span>
-      </header>
-      <section>
-        <header>
-          <h2 className={url}>{story.url}</h2>
-        </header>
-        {/* <!-- cheesy content --> */}
-      </section>
-      <section>
-        <header className={footer}>
-          <h3 className={score}>Points: {story.score}</h3>
-          <h3 className={score}>{formatUnixTime(story.time)}</h3>
-        </header>
-        {/* <!-- more cheesy content --> */}
-      </section>
+    <article className={article}>
+      <div style={{ width: '20px', textAlign: 'right' }}>
+        <HX hx={'h2'} className={articleId}>{index + 1}</HX>
+      </div>
+      <div className={articleMeta}>
+        <HX hx={'h1'} className={articleTitle}>{story.title}</HX>
+
+        <span className={articleUrl}>{story.url}</span>
+
+        <footer>
+          <div className={articleScore}>
+            <StarIcon />
+            <span>{story.score} points</span>
+          </div>
+          <div className={articleBy}>
+            <ProfileIcon />
+            <span>{story.by}</span>
+          </div>
+          <div className={articleTime}>
+            <CalendarIcon />
+            <span>{formatUnixTime(story.time)}</span>
+          </div>
+
+        </footer>
+      </div>
+      <div className={commentCloud}>
+        <CommentCloudIcon />
+      </div>
     </article>
   );
 }
