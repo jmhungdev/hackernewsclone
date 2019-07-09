@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-function CommentCloud() {
+function CommentCloud({ title='CommentCloud' }) {
   return (
     <svg width="36px" height="24px" viewBox="0 0 36 24">
-      <title>CommentCloudIcon</title>
+      <title>{title}</title>
       <g id="icon" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="commentCloud" transform="translate(-64.000000, -92.000000)" stroke="#003D80">
           <g id="ommentCloudIcon" transform="translate(65.000000, 93.000000)">

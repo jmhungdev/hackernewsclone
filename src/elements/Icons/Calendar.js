@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-function Calendar() {
+function Calendar({ title='Calendar' }) {
   return (
-    <svg width="13px" height="12px" viewBox="0 0 13 12" >
-      <title>CalendarIcon</title>
+    <svg width="13px" height="12px" viewBox="0 0 13 12">
+      <title>{title}</title>
       <g id="icon" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="calendar" transform="translate(-104.000000, -142.000000)">
           <g id="CalendarIcon" transform="translate(104.000000, 142.000000)">

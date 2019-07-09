@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-function Profile() {
+function Profile({ title='Profile' }) {
   return (
     <svg width="14px" height="13px" viewBox="0 0 14 13">
-      <title>ProfileIcon</title>
+      <title>{title}</title>
       <g id="icon" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="profile" transform="translate(-85.000000, -142.000000)" stroke="#4370A2">
           <g id="ProfileIcon" transform="translate(86.000000, 142.000000)">
