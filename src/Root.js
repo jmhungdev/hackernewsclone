@@ -15,7 +15,9 @@ const AsyncTopDomainsComponent = lazy(() => (
 const AsyncSearchComponent = lazy(() => (
   import('Pages/Search')
 ));
-
+const AsyncStoryCommentsComponent = lazy(() => (
+  import('Pages/StoryComments')
+));
 
 const LoadingComponent = () => <h3>please wait...</h3>;
 const Root = () => {
@@ -23,8 +25,9 @@ const Root = () => {
     <Suspense fallback={ <LoadingComponent /> }>
       <Switch>
         <Route exact path="/" component={ AsyncHomeComponent } />
-        <Route path="/top-domains" component={ AsyncTopDomainsComponent } />
-        <Route path="/search" component={ AsyncSearchComponent } />
+        <Route exact path="/top-domains" component={ AsyncTopDomainsComponent } />
+        <Route exact path="/search" component={ AsyncSearchComponent } />
+        <Route exact path="/comments" component={ AsyncStoryCommentsComponent } />
         <Redirect to="/" />
       </Switch>
     </Suspense>

@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { useHNstories } from 'Hooks';
-import { TOP_STORIES } from 'Endpoints';
+import { useHNcomments } from 'Hooks';
 
 import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
 import ReactWeekend from 'Components/ReactWeekend';
-import Story from 'Components/Story';
+import Comments from 'Components/Comments';
 import HX from 'Elements/HX';
 
 import { header } from './styles.css';
 
 
-function Home({ history }) {
-  const { stories } = useHNstories(TOP_STORIES, 20);
+function StoryComments({ location:{ state }, history }) {
+  const { story } = state;
+  const { comments } = useHNcomments(story.kids);
 
   return (
     <MainGridLayout>
@@ -24,11 +24,14 @@ function Home({ history }) {
       </HeaderGrid>
 
       <ContentGrid>
-        {stories.map((story, index) => <Story key={ story.id } index={ index } story={ story } history={history} /> )}
+        {comments.length > 0
+          ? <Comments story={story} comments={comments} history={history} />
+          : null
+        }
       </ContentGrid>
     </MainGridLayout>
   );
 }
 
 
-export default Home;
+export default StoryComments;

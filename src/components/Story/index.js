@@ -2,12 +2,13 @@ import React from 'react';
 
 import HX from 'Elements/HX';
 import {
-  Star as StarIcon,
-  Profile as ProfileIcon,
   Calendar as CalendarIcon,
-  CommentCloud as CommentCloudIcon
+  CommentCloud as CommentCloudIcon,
+  Profile as ProfileIcon,
+  Star as StarIcon
 } from 'Elements/Icons';
 import { formatUnixTime } from 'Utils';
+
 import {
   article, articleMeta, articleId,
   articleTitle, articleUrl, articleScore,
@@ -15,9 +16,14 @@ import {
 } from './styles.scss';
 
 
-function Story({ index, story }) {
+function Story({ index, story, history }) {
+  function goToComments() {
+    const pathName = `/comments?${story.id}`;
+    history.push(pathName, { story });
+  }
+
   return (
-    <article className={article}>
+    <article id={story.id} className={article}>
       <div style={{ width: '20px', textAlign: 'right' }}>
         <HX hx={'h2'} className={articleId}>{index + 1}</HX>
       </div>
@@ -42,7 +48,7 @@ function Story({ index, story }) {
 
         </footer>
       </div>
-      <div className={commentCloud}>
+      <div className={commentCloud} onClick={goToComments}>
         <CommentCloudIcon />
       </div>
     </article>

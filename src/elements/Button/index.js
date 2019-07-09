@@ -2,10 +2,9 @@ import React from 'react';
 import { button } from './styles.scss';
 
 
-function Button({ children, style }) {
+function Button({ children, ...rest }) {
   return (
-    <button className={button}
-      style={style}>
+    <button className={button} {...rest}>
       {children}
     </button>
   );

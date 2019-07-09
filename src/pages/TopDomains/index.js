@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useHNStories } from 'Hooks';
+import { useHNstories } from 'Hooks';
 import { TOP_STORIES, BEST_STORIES } from 'Endpoints';
 import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
 import { getTopDomainsFromStories } from 'Utils';
@@ -13,7 +13,7 @@ import { header } from './styles.scss';
 
 
 function TopDomains() {
-  const { stories } = useHNStories(BEST_STORIES, 100);
+  const { stories } = useHNstories(BEST_STORIES, 100);
   const domains = getTopDomainsFromStories(stories);
 
   return (

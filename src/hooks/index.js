@@ -1,2 +1,3 @@
 export { default as useHNsearch } from './useHNsearch';
-export { default as useHNStories } from './useHNStories';
+export { default as useHNstories } from './useHNstories';
+export { default as useHNcomments } from './useHNcomments';
