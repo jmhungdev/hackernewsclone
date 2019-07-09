@@ -1,25 +1,36 @@
 import React from 'react';
 
 import { useHNsearch } from 'Hooks';
-import SearchBar from './SearchBar';
-import SearchList from './SearchList';
+import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
+
+import ReactWeekend from 'Components/ReactWeekend';
+import SearchBar from 'Components/SearchBar';
+import Story from 'Components/Story';
+
+import { header, logo } from './styles.css';
 
 
-function Search() {
-  const { isLoading, isError, searchResults, performSearch } = useHNsearch();
+function Search({ history }) {
+  const { searchResults, performSearch } = useHNsearch();
 
   return (
-    <>
-      <SearchBar performSearch={performSearch} />
+    <MainGridLayout>
+      <HeaderGrid>
+        <header className={header}>
+          <div className={logo}>
+            <ReactWeekend />
+          </div>
+          <SearchBar performSearch={performSearch} />
+        </header>
+      </HeaderGrid>
 
-      {isLoading
-        ? <div>Loading ...</div>
-        : isError
-          ? <div>Something went wrong ...</div>
-          : <SearchList data={searchResults} />
+      <ContentGrid>
+        <ul>
+          {searchResults.map((story, index) => <Story key={ story.id } index={ index } story={ story } history={history} /> )}
+        </ul>
+      </ContentGrid>
+    </MainGridLayout>
 
-      }
-    </>
   );
 }
 

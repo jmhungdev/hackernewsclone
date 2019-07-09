@@ -21,14 +21,14 @@ function Comments({ story, comments, history }) {
   const { id, by, score, time, title, url } = story;
 
   function goBackToStories() {
-    history.push('/');
+    history.goBack();
   }
 
   return (
     <main>
       <header className={commentsHeader}>
         <div onClick={goBackToStories} style={{ cursor: 'pointer' }}>
-          <BackArrowIcon />
+          <BackArrowIcon title="Back to Home" />
         </div>
         <HX hx={'h2'}>{title}</HX>
       </header>
@@ -51,7 +51,6 @@ function Comments({ story, comments, history }) {
               <CalendarIcon />
               <span>{formatUnixTime(time)}</span>
             </div>
-
           </footer>
         </div>
       </article>

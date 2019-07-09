@@ -24,7 +24,9 @@ function Home({ history }) {
       </HeaderGrid>
 
       <ContentGrid>
-        {stories.map((story, index) => <Story key={ story.id } index={ index } story={ story } history={history} /> )}
+        <ul>
+          {stories.map((story, index) => <Story key={ story.id } index={ index } story={ story } history={history} /> )}
+        </ul>
       </ContentGrid>
     </MainGridLayout>
   );

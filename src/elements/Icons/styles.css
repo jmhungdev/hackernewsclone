@@ -1,0 +1,16 @@
+.container {
+  background: none;
+  color: #fff;
+  height: 24px;
+  width: 24px;
+  margin: auto;
+}
+
+.box {
+  display: inline-block;
+  fill: currentColor;
+  height: 24px;
+  line-height: 24px;
+  position: relative;
+  width: 24px;
+}

@@ -22,7 +22,7 @@ function Comment({ comment }) {
       <div className={commentStyle} dangerouslySetInnerHTML={{ __html: text }} />
 
       {kids.length > 0
-        ? (<Button className={button}>{kids.length} replies</Button>)
+        ? (<Button className={button} title="Comment Replies">{kids.length} replies</Button>)
         : null
       }
     </section>

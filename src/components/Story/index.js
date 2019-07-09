@@ -17,41 +17,47 @@ import {
 
 
 function Story({ index, story, history }) {
+  const { id, title, url, score, by, time } = story;
+
   function goToComments() {
-    const pathName = `/comments?${story.id}`;
-    history.push(pathName, { story });
+    const { location } = history;
+    const pathName = `/comments?${id}`;
+
+    history.push(pathName, {
+      story,
+      from: location.pathname
+    });
   }
 
   return (
-    <article id={story.id} className={article}>
+    <li id={id} className={article}>
       <div style={{ width: '20px', textAlign: 'right' }}>
         <HX hx={'h2'} className={articleId}>{index + 1}</HX>
       </div>
       <div className={articleMeta}>
-        <HX hx={'h1'} className={articleTitle}>{story.title}</HX>
+        <HX hx={'h1'} className={articleTitle}>{title}</HX>
 
-        <span className={articleUrl}>{story.url}</span>
+        <span className={articleUrl}>{url}</span>
 
         <footer>
           <div className={articleScore}>
             <StarIcon />
-            <span>{story.score} points</span>
+            <span>{score} points</span>
           </div>
           <div className={articleBy}>
             <ProfileIcon />
-            <span>{story.by}</span>
+            <span>{by}</span>
           </div>
           <div className={articleTime}>
             <CalendarIcon />
-            <span>{formatUnixTime(story.time)}</span>
+            <span>{formatUnixTime(time)}</span>
           </div>
-
         </footer>
       </div>
       <div className={commentCloud} onClick={goToComments}>
         <CommentCloudIcon />
       </div>
-    </article>
+    </li>
   );
 }
 
