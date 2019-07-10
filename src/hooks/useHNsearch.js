@@ -7,13 +7,15 @@ import hnEndpoint, {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_SUCCESS':
-      return { ...state,
+      return {
+        ...state,
         isLoading: false,
         isError: false,
         searchResults: action.payload
       };
     case 'FETCH_FAILURE':
-      return { ...state,
+      return {
+        ...state,
         isLoading: false,
         isError: true
       };
@@ -23,7 +25,7 @@ const reducer = (state, action) => {
 };
 
 async function fetchSearchStories(hits) {
-  const promises = hits.map(async hit => await hnEndpoint(STORY, hit.objectID));
+  const promises = hits.map(hit => hnEndpoint(STORY, hit.objectID));
   const results = await Promise.all(promises);
 
   return results;
@@ -44,10 +46,11 @@ const useHNsearch = () => {
       dispatch({ type: 'FETCH_INIT' });
 
       const results = await hnEndpoint(SEARCH, query);
-      if (results.error) return dispatch({ type: 'FETCH_FAILURE' });
-
-      const payload = await fetchSearchStories(results.hits);
-      dispatch({ type: 'FETCH_SUCCESS', payload });
+      if (results.error) dispatch({ type: 'FETCH_FAILURE' });
+      else {
+        const payload = await fetchSearchStories(results.hits);
+        dispatch({ type: 'FETCH_SUCCESS', payload });
+      }
     };
 
     fetchData();

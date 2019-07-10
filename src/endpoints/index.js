@@ -4,6 +4,7 @@ import fetchSearch from './fetchSearch';
 import fetchStory from './fetchStory';
 import fetchTopStories from './fetchTopStories';
 
+
 export const BEST_STORIES = Symbol('BEST_STORIES');
 export const COMMENT = Symbol('COMMENT');
 export const SEARCH = Symbol('SEARCH');
@@ -20,6 +21,6 @@ const hnAPI = {
 };
 
 
-export default async function hnEndpoint(name, params) {
-  return await hnAPI[name](params);
+export default function hnEndpoint(name, params) {
+  return hnAPI[name](params);
 }

@@ -7,13 +7,15 @@ import hnEndpoint, {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_SUCCESS':
-      return { ...state,
+      return {
+        ...state,
         isLoading: false,
         isError: false,
         stories: action.payload
       };
     case 'FETCH_FAILURE':
-      return { ...state,
+      return {
+        ...state,
         isLoading: false,
         isError: true
       };
@@ -22,7 +24,8 @@ const reducer = (state, action) => {
   }
 };
 
-const useHNStories = (storyCategory, limit=100) => {
+const defaultNumStories = 100;
+const useHNstories = (storyCategory, limit = defaultNumStories) => {
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     isError: false,
@@ -35,22 +38,20 @@ const useHNStories = (storyCategory, limit=100) => {
       if (storyIds.error) return dispatch({ type: 'FETCH_FAILURE' });
 
       const limitedStoryIds = storyIds.slice(0, limit);
-      const promises = limitedStoryIds.map(async storyId => await hnEndpoint(STORY, storyId));
+      const promises = limitedStoryIds.map(storyId => hnEndpoint(STORY, storyId));
       const results = await Promise.all(promises);
 
-      if (results.some(result => result.error)) {
-        dispatch({ type: 'FETCH_FAILURE' });
-        return;
-      }
+      const someErrors = results.some(result => result.error);
+      if (someErrors) return dispatch({ type: 'FETCH_FAILURE' });
 
-      dispatch({ type: 'FETCH_SUCCESS', payload: results });
+      return dispatch({ type: 'FETCH_SUCCESS', payload: results });
     };
 
     fetchData();
-  }, [limit]);
+  }, [limit, storyCategory]);
 
   return { ...state };
 };
 
 
-export default useHNStories;
+export default useHNstories;

@@ -139,7 +139,6 @@ module.exports = {
 
     new CleanWebpackPlugin(),
     // new InlineManifestWebpackPlugin('manifest'),
-
     new CaseSensitivePathsPlugin({
       debug: true
     }),

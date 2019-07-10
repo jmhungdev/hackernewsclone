@@ -13,7 +13,8 @@ import { header } from './styles.css';
 
 
 function Home({ history }) {
-  const { stories } = useHNstories(TOP_STORIES, 20);
+  const numStories = 20;
+  const { stories } = useHNstories(TOP_STORIES, numStories);
 
   return (
     <MainGridLayout>
@@ -32,7 +33,7 @@ function Home({ history }) {
 
       <ContentGrid>
         <ul>
-          {stories.map((story, index) => <Story key={ story.id } index={ index } story={ story } history={history} /> )}
+          {stories.map((story, index) => <Story key={story.id} index={index} story={story} history={history} />)}
         </ul>
       </ContentGrid>
     </MainGridLayout>

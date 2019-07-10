@@ -11,7 +11,7 @@ import HX from 'Elements/HX';
 import { header } from './styles.css';
 
 
-function StoryComments({ location:{ state }, history }) {
+function StoryComments({ location: { state }, history }) {
   const { story } = state;
   const { comments } = useHNcomments(story.kids);
 

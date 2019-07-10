@@ -7,13 +7,15 @@ import hnEndpoint, {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_SUCCESS':
-      return { ...state,
+      return {
+        ...state,
         isLoading: false,
         isError: false,
         comments: action.payload
       };
     case 'FETCH_FAILURE':
-      return { ...state,
+      return {
+        ...state,
         isLoading: false,
         isError: true
       };
@@ -22,7 +24,7 @@ const reducer = (state, action) => {
   }
 };
 
-const useHNcomments = (commentIds=[]) => {
+const useHNcomments = (commentIds = []) => {
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     isError: false,
@@ -33,7 +35,7 @@ const useHNcomments = (commentIds=[]) => {
     if (commentIds.length === 0) return;
 
     const fetchData = async () => {
-      const promises = commentIds.map(async commentId => await hnEndpoint(COMMENT, commentId));
+      const promises = commentIds.map(commentId => hnEndpoint(COMMENT, commentId));
       const results = await Promise.all(promises);
 
       if (results.some(result => result.error)) {

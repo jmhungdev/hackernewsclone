@@ -16,4 +16,3 @@ async function fetchComment(commentId) {
 
 
 export default fetchComment;
-

@@ -10,18 +10,18 @@ import {
 
 function SearchBar({ performSearch }) {
   const [searchTerm, setSearchTerm] = useState('reactjs');
-  const [ btnDisplay, setBtnDisplay ] = useState({});
+  const [btnDisplay, setBtnDisplay] = useState({});
   const inputEl = useRef(null);
 
   useEffect(() => {
     performSearch(searchTerm);
-  }, []);
+  }, [performSearch, searchTerm]);
 
-  function handleOnChange(e) {
-    const value = e.target.value;
+  function handleOnChange(evt) {
+    const { value } = evt.target;
 
     if (value !== '') {
-      setBtnDisplay({ 'display': 'flex' });
+      setBtnDisplay({ display: 'flex' });
     }
 
     if (value === '') {
@@ -31,24 +31,24 @@ function SearchBar({ performSearch }) {
     setSearchTerm(value);
   }
 
-  function handleOnClick(e) {
-    e.preventDefault();
+  function handleOnClick(evt) {
+    evt.preventDefault();
 
     if (!searchTerm) return;
 
     performSearch(searchTerm);
   }
 
-  function handleOnFocus(e) {
-    setBtnDisplay({ 'display': 'flex' });
+  function handleOnFocus() {
+    setBtnDisplay({ display: 'flex' });
   }
 
-  function handleOnKeyPress(e) {
-    const searchTerm = inputEl.current.value;
+  function handleOnKeyPress(evt) {
+    const { value } = inputEl.current;
 
-    if (e.key !== 'Enter' || !searchTerm) return;
+    if (evt.key !== 'Enter' || !value) return;
 
-    performSearch(searchTerm);
+    performSearch(value);
   }
 
   function removeSearchTerm() {
@@ -57,30 +57,30 @@ function SearchBar({ performSearch }) {
   }
 
   return (
-    <div className={ container }>
-      <div className={ barContainer }>
-        <div className={ searchBar }>
-          <input className={ searchInput } type="search" name="q" value={ searchTerm }
-            ref={ inputEl }
+    <div className={container}>
+      <div className={barContainer}>
+        <div className={searchBar}>
+          <input className={searchInput} type="search" name="q" value={searchTerm}
+            ref={inputEl}
             maxLength="2048"
             autoComplete="off"
             autoCorrect="off"
             spellCheck="off"
             title="search"
-            onKeyPress={ handleOnKeyPress }
-            onFocus={ handleOnFocus }
-            onChange={ handleOnChange } />
+            onKeyPress={handleOnKeyPress}
+            onFocus={handleOnFocus}
+            onChange={handleOnChange} />
         </div>
 
-        <div className={ theXBox }>
+        <div className={theXBox}>
           <button className={theXButton} style={btnDisplay} type="button" onClick={removeSearchTerm}>
             <span className={theX}>x</span>
           </button>
         </div>
       </div>
 
-      <button className={ searchButton }
-        onClick={ handleOnClick }>
+      <button className={searchButton}
+        onClick={handleOnClick}>
         <SearchIcon />
       </button>
     </div>

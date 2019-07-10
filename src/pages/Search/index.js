@@ -33,7 +33,9 @@ function Search({ history }) {
 
       <ContentGrid>
         <ul>
-          {searchResults.map((story, index) => <Story key={ story.id } index={ index } story={ story } history={history} /> )}
+          {searchResults.map((story, index) => (
+            <Story key={story.id} index={index} story={story} history={history} />
+          ))}
         </ul>
       </ContentGrid>
     </MainGridLayout>

@@ -16,4 +16,3 @@ async function fetchStory(articleId) {
 
 
 export default fetchStory;
-

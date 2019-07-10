@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { formatUnixTime } from 'Utils';
 import {
   BackArrow as BackArrowIcon,
   Calendar as CalendarIcon,
@@ -8,7 +9,6 @@ import {
 } from 'Elements/Icons';
 import HX from 'Elements/HX';
 import Comment from './Comment';
-import { formatUnixTime } from 'Utils';
 
 import {
   commentsHeader, article, articleMeta,

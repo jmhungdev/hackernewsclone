@@ -11,11 +11,12 @@ import ReactWeekend from 'Components/ReactWeekend';
 import DomainTable from 'Components/DomainTable';
 import Button from 'Elements/Button';
 
-import { header } from './styles.scss';
+import { header, actionButtons } from './styles.scss';
 
 
 function TopDomains() {
-  const { stories } = useHNstories(BEST_STORIES, 100);
+  const numStories = 100;
+  const { stories } = useHNstories(BEST_STORIES, numStories);
   const domains = getTopDomainsFromStories(stories);
 
   return (
@@ -23,7 +24,7 @@ function TopDomains() {
       <HeaderGrid>
         <header className={header}>
           <ReactWeekend />
-          <div>
+          <div className={actionButtons}>
             <Button onClick={() => console.log('top stories')}>Top Stories</Button>
             <Button onClick={() => console.log('best stories')}>Best Stories</Button>
           </div>

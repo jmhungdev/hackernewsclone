@@ -1,3 +1,5 @@
+const ms = 1000;
+
 const options = {
   year: 'numeric',
   day: 'numeric',
@@ -8,7 +10,7 @@ const options = {
 };
 
 function formatUnixTime(unixTime) {
-  return new Date(unixTime * 1000).toLocaleTimeString('en-US', options);
+  return new Date(unixTime * ms).toLocaleTimeString('en-US', options);
 }
 
 

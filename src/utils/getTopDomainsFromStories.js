@@ -1,8 +1,10 @@
+const numDomains = 20;
+
 const getTopDomainsFromStories = stories => {
   const domains = stories.reduce((initDomains, story) => {
-    const newDomains = initDomains.slice();
-    if (!story.url) return newDomains;
+    if (!story.url) return initDomains;
 
+    const newDomains = initDomains.slice();
     const url = new URL(story.url);
     const urlIndex = newDomains.findIndex(domainObj => domainObj.url === url.hostname);
 
@@ -10,17 +12,15 @@ const getTopDomainsFromStories = stories => {
       newDomains.push({ url: url.hostname, score: story.score, numPosts: 1 });
     } else {
       newDomains[urlIndex].score += story.score;
-      newDomains[urlIndex].numPosts++;
+      newDomains[urlIndex].numPosts += 1;
     }
 
     return newDomains;
   }, []);
 
-  domains.sort((first, second) => {
-    return second.score - first.score;
-  });
-  //Only display the top 20 domains
-  return domains.slice(0, 20);
+  domains.sort((first, second) => second.score - first.score);
+
+  return domains.slice(0, numDomains);
 };
 
 

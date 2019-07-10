@@ -8,7 +8,6 @@ function Button({ children, ...rest }) {
       {children}
     </button>
   );
-
 }
 
 
