@@ -1,11 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const { cssPaths } = require('./base-params');
+const { cssPaths, logoPath } = require('./base-params');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 
@@ -28,7 +29,7 @@ module.exports = {
                 mode: 'local',
                 // localIdentName: '[folder]__[local]--[hash:base64:10]',
                 // localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                localIdentName: '[local]',
+                localIdentName: '[local]__[hash:base64:5]',
                 context: path.resolve(__dirname, 'src'),
                 hashPrefix: 'custom-hash'
                 // getLocalIdent: https://github.com/webpack-contrib/css-loader#getlocalident
@@ -90,7 +91,7 @@ module.exports = {
 
         vendor: {
           name: 'vendor',
-          // test: /[\\/]node_modules[\\/](react|react-dom|core-js|react-hot-loader)[\\/]/,
+          // test: /[\\/]node_modules[\\/](react|react-dom|core-js|react-hot-loader|date-fns|react-router-dom)[\\/]/,
           test: /node_modules/,
           chunks: 'all',
           priority: 20,
@@ -117,7 +118,6 @@ module.exports = {
       title: 'react ❤ webpack',
       template: 'index.html',
       meta: {
-        charset: 'utf-8',
         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
         ['My App']: 'Barebones foundation to quickly start building your web applications'
       },
@@ -147,6 +147,25 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
+      }
+    }),
+
+    new FaviconsWebpackPlugin({
+      logo: `${logoPath}/blue-white-logo.png`,
+      title: 'web fountain',
+      prefix: 'icons-[hash:4]/',
+      persistentCache: true,
+      icons: {
+        android: false,
+        appleIcon: false,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
       }
     }),
 

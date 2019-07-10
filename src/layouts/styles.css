@@ -9,6 +9,11 @@
   grid-row: header;
 }
 
+.navGrid {
+  grid-column: main;
+  grid-row: 2;
+}
+
  .contentGrid {
   grid-column: main;
   grid-row: content;

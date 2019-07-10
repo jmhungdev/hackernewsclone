@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { useHNstories } from 'Hooks';
 import { TOP_STORIES, BEST_STORIES } from 'Endpoints';
-import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
+
+import { MainGridLayout, HeaderGrid, NavGrid, ContentGrid } from 'Layouts';
 import { getTopDomainsFromStories } from 'Utils';
 
 import ReactWeekend from 'Components/ReactWeekend';
@@ -27,6 +29,12 @@ function TopDomains() {
           </div>
         </header>
       </HeaderGrid>
+
+      <NavGrid>
+        <Link to={`/`}>Home</Link>
+        <Link to={`/top-domains`}>Top Domains</Link>
+        <Link to={`/search`}>Search</Link>
+      </NavGrid>
 
       <ContentGrid>
         <DomainTable domains={domains} />

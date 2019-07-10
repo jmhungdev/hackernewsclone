@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { useHNsearch } from 'Hooks';
-import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
 
+import { MainGridLayout, HeaderGrid, NavGrid, ContentGrid } from 'Layouts';
 import ReactWeekend from 'Components/ReactWeekend';
 import SearchBar from 'Components/SearchBar';
 import Story from 'Components/Story';
@@ -23,6 +24,12 @@ function Search({ history }) {
           <SearchBar performSearch={performSearch} />
         </header>
       </HeaderGrid>
+
+      <NavGrid>
+        <Link to={`/`}>Home</Link>
+        <Link to={`/top-domains`}>Top Domains</Link>
+        <Link to={`/search`}>Search</Link>
+      </NavGrid>
 
       <ContentGrid>
         <ul>

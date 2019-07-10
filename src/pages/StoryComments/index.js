@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { useHNcomments } from 'Hooks';
 
-import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
+import { MainGridLayout, HeaderGrid, NavGrid, ContentGrid } from 'Layouts';
 import ReactWeekend from 'Components/ReactWeekend';
 import Comments from 'Components/Comments';
 import HX from 'Elements/HX';
@@ -22,6 +23,12 @@ function StoryComments({ location:{ state }, history }) {
           <HX hx={'h1'}>Weekend Tech News</HX>
         </header>
       </HeaderGrid>
+
+      <NavGrid>
+        <Link to={`/`}>Home</Link>
+        <Link to={`/top-domains`}>Top Domains</Link>
+        <Link to={`/search`}>Search</Link>
+      </NavGrid>
 
       <ContentGrid>
         {comments.length > 0
