@@ -17,7 +17,7 @@ async function fetchStory(articleId) {
 }
 
 async function fetchStories() {
-  const response = await fetch('http://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', { method: 'GET', mode: 'cors' });
+  const response = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty', { method: 'GET', mode: 'cors' });
   const results = await response.json();
 
   return results;

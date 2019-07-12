@@ -4,7 +4,7 @@ const options = {
 };
 
 async function fetchTopStories() {
-  const url = `http://hacker-news.firebaseio.com/v0/topstories.json`;
+  const url = `https://hacker-news.firebaseio.com/v0/topstories.json`;
 
   try {
     const response = await fetch(url, options);

@@ -41,7 +41,7 @@ const useHNsearch = () => {
       const results = await hnEndpoint(SEARCH, query);
       if (results.error) dispatch({ type: 'FETCH_FAILURE' });
 
-      dispatch({ type: 'FETCH_SUCCESS', results });
+      dispatch({ type: 'FETCH_SUCCESS', payload: results.hits });
     };
 
     fetchData();

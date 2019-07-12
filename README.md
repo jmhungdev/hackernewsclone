@@ -6,5 +6,5 @@
 * https://hackerweb.app/
 * https://hnpwa.com/
 * https://hckrnews.com/
-* https://hnleaderboard.com/?
+* https://hnleaderboard.com/
 * https://new-hn.algolia.com/?experimental&sort=byPopularity&prefix&page=0&dateRange=all&type=story
