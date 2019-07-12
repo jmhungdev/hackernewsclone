@@ -20,13 +20,8 @@ function SearchBar({ performSearch }) {
   function handleOnChange(evt) {
     const { value } = evt.target;
 
-    if (value !== '') {
-      setBtnDisplay({ display: 'flex' });
-    }
-
-    if (value === '') {
-      setBtnDisplay({});
-    }
+    if (value !== '') setBtnDisplay({ display: 'flex' });
+    if (value === '') setBtnDisplay({});
 
     setSearchTerm(value);
   }

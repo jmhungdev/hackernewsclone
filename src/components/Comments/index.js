@@ -28,7 +28,7 @@ function Comments({ story, comments, history }) {
     <main>
       <header className={commentsHeader}>
         <div onClick={goBackToStories} style={{ cursor: 'pointer' }}>
-          <BackArrowIcon title="Back to Home" />
+          <BackArrowIcon />
         </div>
         <HX hx={'h2'}>{title}</HX>
       </header>

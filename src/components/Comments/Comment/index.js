@@ -19,7 +19,7 @@ function Comment({ comment }) {
         <span className={pubTime}>{formatUnixTime(time)}</span>
       </header>
 
-      <div className={commentStyle} dangerouslySetInnerHTML={{ __html: text }} />
+      <div className={commentStyle}>{text}</div>
 
       {kids.length > 0
         ? <Button className={button} title="Comment Replies">{kids.length} replies</Button>
