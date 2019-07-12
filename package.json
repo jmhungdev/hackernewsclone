@@ -74,6 +74,7 @@
     "build:dev": "npm run clean && webpack --config ./webpack/index.js --env production && python3 -m http.server 8000 --directory build",
     "clean": "rimraf recordsPath.json ./build",
     "dev": "nodemon --watch webpack --exec 'webpack-dev-server --config ./webpack/index.js --env development'",
-    "refresh": "rm -rf node_modules/ package-lock.json && npm install"
+    "refresh": "rm -rf node_modules/ package-lock.json && npm install",
+    "linter": "eslint --config ./.eslintrc --fix src/"
   }
 }

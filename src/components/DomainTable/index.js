@@ -17,7 +17,7 @@ function DomainTable({ domains }) {
         <span className={pointsStyle}>Mean Points</span>
       </header>
       <ul className={list}>
-        {domains.map((domain, indx) => <Row key={domain.url} indx={indx} domain={domain} />)}
+        {domains.map((domain, indx) => <Row key={indx} domain={domain} />)}
       </ul>
     </>
   );

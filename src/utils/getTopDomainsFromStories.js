@@ -1,26 +1,48 @@
-const numDomains = 20;
+const numTopDomains = 20;
 
-const getTopDomainsFromStories = stories => {
-  const domains = stories.reduce((initDomains, story) => {
-    if (!story.url) return initDomains;
+function generateTopDomains(stories) {
+  const topDomains = {};
 
-    const newDomains = initDomains.slice();
-    const url = new URL(story.url);
-    const urlIndex = newDomains.findIndex(domainObj => domainObj.url === url.hostname);
+  for (const story of stories) {
+    const { url, score } = story;
+    if (!url) continue;
 
-    if (urlIndex === -1) {
-      newDomains.push({ url: url.hostname, score: story.score, numPosts: 1 });
-    } else {
-      newDomains[urlIndex].score += story.score;
-      newDomains[urlIndex].numPosts += 1;
+    const { hostname } = new URL(url);
+    const topDomain = topDomains[hostname];
+
+    if (!topDomain) {
+      topDomains[hostname] = {
+        hostname,
+        score,
+        numPosts: 1,
+        mean: score
+      };
+      continue;
     }
 
-    return newDomains;
-  }, []);
+    topDomains[hostname].score += score;
+    topDomains[hostname].numPosts += 1;
+    topDomains[hostname].mean = Math.round(topDomains[hostname].score / topDomains[hostname].numPosts);
+  }
 
-  domains.sort((first, second) => second.score - first.score);
+  return topDomains;
+}
 
-  return domains.slice(0, numDomains);
+function filterTopDomains(topDomains) {
+  const sorted = Object.keys(topDomains).sort((firstEl, secEl) => topDomains[secEl].score - topDomains[firstEl].score);
+
+  const filtered = sorted.slice(0, numTopDomains);
+
+  return filtered.map((topDomain, indx) => {
+    return { ...topDomains[topDomain], rank: indx + 1 };
+  });
+}
+
+const getTopDomainsFromStories = stories => {
+  const topDomains = generateTopDomains(stories);
+  const filteredTopDomains = filterTopDomains(topDomains);
+
+  return filteredTopDomains;
 };
 
 

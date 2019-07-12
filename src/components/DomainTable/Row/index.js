@@ -5,18 +5,16 @@ import {
 } from './styles.scss';
 
 
-let points = 1000;
-
-function Row({ indx, domain }) {
-  const { url, score, numPosts } = domain;
+function Row({ domain=[] }) {
+  const { rank, hostname, score, numPosts, mean } = domain;
 
   return (
     <li className={rowGrid}>
-      <span className={rankStyle}>{indx}</span>
-      <span className={domainStyle}>{url}</span>
+      <span className={rankStyle}>{rank}</span>
+      <span className={domainStyle}>{hostname}</span>
       <span className={scoreStyle}>{score}</span>
       <span className={postsStyle}>{numPosts}</span>
-      <span className={pointsStyle}>{points++}</span>
+      <span className={pointsStyle}>{mean}</span>
     </li>
   );
 }

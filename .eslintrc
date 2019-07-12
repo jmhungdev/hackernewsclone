@@ -34,6 +34,9 @@
     "react/jsx-uses-vars": 2,
     "react/require-render-return": 0,
     "react/jsx-wrap-multilines": [2, { "declaration": true, "assignment": true, "return": true }],
-    "react/jsx-no-bind": [0, { "ignoreRefs": false, "allowArrowFunctions": false, "allowBind": false }]
+    "react/jsx-no-bind": [0, { "ignoreRefs": false, "allowArrowFunctions": false, "allowBind": false }],
+
+    "no-underscore-dangle": 0,
+    "no-nested-ternary": 0
   }
 }
