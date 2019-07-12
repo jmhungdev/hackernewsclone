@@ -7,6 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 
@@ -114,12 +115,20 @@ module.exports = {
   },
 
   plugins: [
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      minRatio: 0.8,
+      threshold: 10240
+    }),
+
     new HtmlWebpackPlugin({
       title: 'react ❤ webpack',
       template: 'index.html',
       meta: {
         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-        ['My App']: 'Barebones foundation to quickly start building your web applications'
+        'My App': 'Barebones foundation to quickly start building your web applications'
       },
       minify: false,
       // minify: {

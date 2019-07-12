@@ -65,6 +65,12 @@ module.exports = {
             limit: 25000,
             name: './images/[name].[hash:4].[ext]'
           }
+        },
+        {
+          loader: 'image-webpack-loader',
+          options: {
+            enforce: 'pre'
+          }
         }]
       }
     ]
