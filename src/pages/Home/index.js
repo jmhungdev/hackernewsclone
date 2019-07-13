@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import { MainGridLayout, HeaderGrid, ContentGrid } from 'Layouts';
+import { MainGridLayout, HeaderGrid, ContentGrid, NavGrid} from 'Layouts';
 import ReactWeekend from 'Components/ReactWeekend';
 import Story from 'Components/Story';
+import Navigation from 'Components/Navigation';
 import HX from 'Elements/HX';
 
 import { header } from './styles.css';
@@ -70,6 +71,11 @@ function Home({ history }) {
           <HX hx={'h1'}>Weekend Tech News</HX>
         </header>
       </HeaderGrid>
+
+      <NavGrid> 
+        <Navigation/>
+      </NavGrid>
+
 
       <ContentGrid>
         {isError
